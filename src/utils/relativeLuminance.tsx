@@ -1,4 +1,4 @@
-import { RGB } from '../types/RGB';
+import { RGB } from "../types/Color";
 
 export const relativeLuminance = (rgb: RGB) => {
   const { r, g, b: bVal } = rgb;

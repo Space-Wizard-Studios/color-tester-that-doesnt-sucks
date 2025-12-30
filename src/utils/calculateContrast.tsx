@@ -1,5 +1,5 @@
 import { relativeLuminance } from './relativeLuminance';
-import { RGB } from '../types/RGB';
+import { RGB } from "../types/Color";
 
 export const calculateContrast = (rgb1: RGB, rgb2: RGB) => {
   const lum1 = relativeLuminance(rgb1);

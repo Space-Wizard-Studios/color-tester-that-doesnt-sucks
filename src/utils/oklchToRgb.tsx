@@ -1,4 +1,4 @@
-import { RGB } from '../types/RGB';
+import { RGB } from "../types/Color";
 
 export const oklchToRgb = (l: number, c: number, h: number): RGB => {
   const a = c * Math.cos((h * Math.PI) / 180);
