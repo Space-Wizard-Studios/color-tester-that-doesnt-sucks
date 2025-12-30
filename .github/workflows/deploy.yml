@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -11,43 +11,42 @@ permissions:
   id-token: write
 
 concurrency:
-  group: deploy-pages-${{ github.ref }}
+  group: pages
   cancel-in-progress: true
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
-      - name: Setup Node.js
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '24'
+          node-version: 20
+          cache: pnpm
 
-      - name: Enable Corepack and activate pnpm
-        run: |
-          corepack enable
-          corepack prepare pnpm@latest --activate
+      - name: Enable Corepack
+        run: corepack enable
 
-      - name: Install dependencies
-        run: |
-          corepack enable
-          pnpm install --frozen-lockfile
+      - name: Install deps
+        run: pnpm install --frozen-lockfile
 
       - name: Build
-        env:
-          NODE_ENV: production
         run: pnpm run build
 
-      - name: Configure GitHub Pages
-        uses: actions/configure-pages@v4
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
 
-      - name: Upload artifact for GitHub Pages
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist
+          path: dist
 
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v2
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
