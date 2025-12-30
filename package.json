@@ -1,0 +1,34 @@
+{
+  "name": "contrast-checker-that-doesnt-sucks",
+  "version": "0.1.0",
+  "description": "",
+  "private": true,
+  "license": "UNLICENSED",
+  "author": "Space Wizard Studios",
+  "engines": {
+    "node": ">=24.0.0",
+    "pnpm": ">=10.0.0"
+  },
+  "type": "module",
+  "dependencies": {
+    "@tailwindcss/vite": "^4.1.18",
+    "lucide-react": "^0.562.0",
+    "react": "^19.2.3",
+    "react-color": "^2.19.3",
+    "react-dom": "^19.2.3",
+    "tailwindcss": "^4.1.18"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@vitejs/plugin-react": "^5.1.2",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.0"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "type:check": "tsc --noEmit"
+  }
+}
