@@ -11,13 +11,19 @@ type Matrix3 = [
 const clamp = (v: number, a = 0, b = 255) => Math.min(b, Math.max(a, v));
 
 export const applyGamma = (rgb: RGB, gamma: number): RGB => {
-    if (!gamma || gamma === 1) return rgb;
+    if (gamma === 1 || gamma === undefined || gamma === null) return rgb;
+    if (gamma <= 0) return rgb;
     const apply = (v: number) => clamp(Math.pow(v / 255, 1 / gamma) * 255);
     return { r: apply(rgb.r), g: apply(rgb.g), b: apply(rgb.b) };
 };
 
 export const applyContrast = (rgb: RGB, contrast: number): RGB => {
-    if (!contrast || contrast === 1) return rgb;
+    if (contrast === 1 || contrast === undefined || contrast === null) return rgb;
+    // Special case: treat contrast === 0 as neutralizing the color to a mid gray
+    if (contrast === 0) {
+        const mid = 128;
+        return { r: mid, g: mid, b: mid };
+    }
     const apply = (v: number) => clamp((v - 128) * contrast + 128);
     return { r: apply(rgb.r), g: apply(rgb.g), b: apply(rgb.b) };
 };
