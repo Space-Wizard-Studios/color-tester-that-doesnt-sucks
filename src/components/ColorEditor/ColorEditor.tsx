@@ -49,11 +49,11 @@ export const ColorEditor: React.FC<ColorEditorProps> = ({ selectedColor, foregro
             <div className="space-y-4">
                 <OklchSliders color={currentColor} onChange={(u) => updateColor(u)} />
             </div>
-            
+
             {/* Visual config placed at end of editor for convenient access */}
             {visualConfig && onVisualChange && onVisualReset && (
                 <div className="mt-6">
-                    <ConfigCard config={visualConfig} onChange={onVisualChange} onReset={onVisualReset} foregrounds={foregrounds} />
+                    <ConfigCard config={visualConfig} onChange={onVisualChange} onReset={onVisualReset} foregrounds={foregrounds} backgrounds={backgrounds} />
                 </div>
             )}
         </div>

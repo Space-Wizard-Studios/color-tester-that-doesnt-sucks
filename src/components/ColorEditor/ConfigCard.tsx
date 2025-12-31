@@ -7,9 +7,10 @@ type Props = {
     onChange: (next: VisualConfig) => void;
     onReset: () => void;
     foregrounds: Color[];
+    backgrounds: Color[];
 };
 
-export const ConfigCard: React.FC<Props> = ({ config, onChange, onReset, foregrounds }) => {
+export const ConfigCard: React.FC<Props> = ({ config, onChange, onReset, foregrounds, backgrounds }) => {
     const update = (patch: Partial<VisualConfig>) => onChange({ ...config, ...patch });
 
     const toCss = (c: Color) => {
@@ -70,6 +71,17 @@ export const ConfigCard: React.FC<Props> = ({ config, onChange, onReset, foregro
                     <div className="block mb-2 font-medium">Foreground colors</div>
                     <ul className="flex flex-wrap gap-1" aria-label="Foreground colors">
                         {foregrounds.map((c) => (
+                            <li key={c.id} className="flex items-center gap-1 p-1 rounded bg-white list-none">
+                                <div key={c.id} title={c.name} aria-label={c.name} className="w-6 h-6 rounded" style={{ background: toCss(c) }} />
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+
+                <div>
+                    <div className="block mb-2 font-medium">Backgrounds colors</div>
+                    <ul className="flex flex-wrap gap-1" aria-label="Backgrounds colors">
+                        {backgrounds.map((c) => (
                             <li key={c.id} className="flex items-center gap-1 p-1 rounded bg-white list-none">
                                 <div key={c.id} title={c.name} aria-label={c.name} className="w-6 h-6 rounded" style={{ background: toCss(c) }} />
                             </li>

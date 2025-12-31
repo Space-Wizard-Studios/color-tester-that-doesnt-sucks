@@ -86,7 +86,7 @@ const ContrastChecker: React.FC = () => {
   return (
     <main className="min-h-screen flex flex-row bg-gray-50">
 
-      <div className="flex-1 overflow-y-auto p-6 max-w-4/5">
+      <div className="flex-1 overflow-y-auto p-6 max-w-3/4">
 
         <header className="mb-6">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Contrast Checker That Doesn't Sucks (too much)</h1>
@@ -125,7 +125,7 @@ const ContrastChecker: React.FC = () => {
         </div>
       </div>
 
-      <div className="hidden md:block max-w-1/5 border-l border-gray-200 bg-white overflow-y-auto">
+      <div className="hidden md:block max-w-1/4 border-l border-gray-200 bg-white overflow-y-auto">
         <ColorEditor selectedColor={selectedColor} foregrounds={foregrounds} backgrounds={backgrounds} updateForeground={updateForeground} updateBackground={updateBackground} visualConfig={visualConfig} onVisualChange={(next) => setVisualConfig(next)} onVisualReset={resetVisualConfig} />
       </div>
 

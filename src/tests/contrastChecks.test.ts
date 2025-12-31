@@ -1,7 +1,7 @@
 /// <reference types="vitest" />
 
 import { describe, test, expect } from 'vitest';
-import { checkNonTextContrast, checkIconContrast, deltaEoklch, simulateAndCheck, evaluateAmbientVariants } from '../contrastChecks';
+import { checkNonTextContrast, checkIconContrast, deltaEoklch, simulateAndCheck, evaluateAmbientVariants } from '../utils/contrastChecks';
 
 const black = { r: 0, g: 0, b: 0 };
 const white = { r: 255, g: 255, b: 255 };
