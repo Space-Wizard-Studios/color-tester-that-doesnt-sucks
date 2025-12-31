@@ -4,3 +4,4 @@ export { rgbToHex } from './rgbToHex';
 export { rgbToCss } from './rgbToCss';
 export { relativeLuminance } from './relativeLuminance';
 export { calculateContrast } from './calculateContrast';
+export { applyVisualConfig, applyGamma, applyContrast, simulateColorDeficiency } from './visual';

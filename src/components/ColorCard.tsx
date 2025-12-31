@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
-import { oklchToRgb, rgbToCss } from '../utils';
-import type { Color } from '../types/Color';
+import { oklchToRgb, rgbToCss, applyVisualConfig } from '../utils';
+import type { Color, VisualConfig } from '../types/Color';
 
 type ColorCardProps = {
     color: Color;
@@ -12,12 +12,14 @@ type ColorCardProps = {
     canRemove: boolean;
     updateForeground: (id: number, updates: Partial<Color>) => void;
     updateBackground: (id: number, updates: Partial<Color>) => void;
+    visualConfig?: VisualConfig;
 };
 
-export const ColorCard: React.FC<ColorCardProps> = ({ color, type, isSelected, onSelect, onRemove, canRemove, updateForeground, updateBackground }) => {
+export const ColorCard: React.FC<ColorCardProps> = ({ color, type, isSelected, onSelect, onRemove, canRemove, updateForeground, updateBackground, visualConfig }) => {
     const [localName, setLocalName] = useState<string>(color.name);
     const [isHovered, setIsHovered] = useState<boolean>(false);
-    const rgb = oklchToRgb(color.l, color.c, color.h);
+    const rgbRaw = oklchToRgb(color.l, color.c, color.h);
+    const rgb = visualConfig ? applyVisualConfig(rgbRaw, visualConfig) : rgbRaw;
     const css = rgbToCss(rgb, color.a ?? 1);
 
     useEffect(() => {
@@ -35,7 +37,11 @@ export const ColorCard: React.FC<ColorCardProps> = ({ color, type, isSelected, o
     };
 
     return (
-        <div
+        <button
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            onTouchStart={() => setIsHovered(true)}
+            onTouchEnd={() => setIsHovered(false)}
             className={`border-2 rounded-lg p-3 bg-white flex flex-col gap-3 shrink-0 w-32 transition-colors relative ${isSelected ? 'border-blue-500 shadow-md' : 'border-gray-200 hover:border-gray-300'
                 }`}
         >
@@ -56,8 +62,6 @@ export const ColorCard: React.FC<ColorCardProps> = ({ color, type, isSelected, o
                 style={{ backgroundColor: css }}
                 onFocus={() => setIsHovered(true)}
                 onBlur={() => setIsHovered(false)}
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
                 onTouchStart={() => setIsHovered(true)}
                 onTouchEnd={() => setIsHovered(false)}
             >
@@ -72,7 +76,7 @@ export const ColorCard: React.FC<ColorCardProps> = ({ color, type, isSelected, o
                 onClick={(e: React.MouseEvent<HTMLInputElement>) => e.stopPropagation()}
                 className="w-full text-sm font-medium text-gray-700 bg-transparent border-b border-transparent hover:border-gray-300 focus:border-blue-500 focus:outline-none px-1 py-1 text-center"
             />
-        </div>
+        </button>
     );
 };
 

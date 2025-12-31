@@ -30,6 +30,9 @@ importers:
       '@types/react':
         specifier: ^18.2.0
         version: 18.3.27
+      '@types/react-color':
+        specifier: ^3.0.13
+        version: 3.0.13(@types/react@18.3.27)
       '@types/react-dom':
         specifier: ^18.2.0
         version: 18.3.7(@types/react@18.3.27)
@@ -526,6 +529,11 @@ packages:
   '@types/prop-types@15.7.15':
     resolution: {integrity: sha512-F6bEyamV9jKGAFBEmlQnesRPGOQqS2+Uwi0Em15xenOxHaf2hv6L8YCVn3rPdPJOiJfPiCnLIRyvwVaqMY3MIw==}
 
+  '@types/react-color@3.0.13':
+    resolution: {integrity: sha512-2c/9FZ4ixC5T3JzN0LP5Cke2Mf0MKOP2Eh0NPDPWmuVH3NjPyhEjqNMQpN1Phr5m74egAy+p2lYNAFrX1z9Yrg==}
+    peerDependencies:
+      '@types/react': '*'
+
   '@types/react-dom@18.3.7':
     resolution: {integrity: sha512-MEe3UeoENYVFXzoXEWsvcpg6ZvlrFNlOQ7EOsvhI3CfAXwzPfO8Qwuxd40nepsYKqyyVQnTdEfv68q91yLcKrQ==}
     peerDependencies:
@@ -533,6 +541,11 @@ packages:
 
   '@types/react@18.3.27':
     resolution: {integrity: sha512-cisd7gxkzjBKU2GgdYrTdtQx1SORymWyaAFhaxQPK9bYO9ot3Y5OikQRvY0VYQtvwjeQnizCINJAenh/V7MK2w==}
+
+  '@types/reactcss@1.2.13':
+    resolution: {integrity: sha512-gi3S+aUi6kpkF5vdhUsnkwbiSEIU/BEJyD7kBy2SudWBUuKmJk8AQKE0OVcQQeEy40Azh0lV6uynxlikYIJuwg==}
+    peerDependencies:
+      '@types/react': '*'
 
   '@vitejs/plugin-react@5.1.2':
     resolution: {integrity: sha512-EcA07pHJouywpzsoTUqNh5NwGayl2PPVEJKUSinGGSxFGYn+shYbqMGBg6FXDqgXum9Ou/ecb+411ssw8HImJQ==}
@@ -1234,6 +1247,11 @@ snapshots:
 
   '@types/prop-types@15.7.15': {}
 
+  '@types/react-color@3.0.13(@types/react@18.3.27)':
+    dependencies:
+      '@types/react': 18.3.27
+      '@types/reactcss': 1.2.13(@types/react@18.3.27)
+
   '@types/react-dom@18.3.7(@types/react@18.3.27)':
     dependencies:
       '@types/react': 18.3.27
@@ -1242,6 +1260,10 @@ snapshots:
     dependencies:
       '@types/prop-types': 15.7.15
       csstype: 3.2.3
+
+  '@types/reactcss@1.2.13(@types/react@18.3.27)':
+    dependencies:
+      '@types/react': 18.3.27
 
   '@vitejs/plugin-react@5.1.2(vite@7.3.0(jiti@2.6.1)(lightningcss@1.30.2))':
     dependencies:

@@ -1,7 +1,7 @@
 export { ComplianceIndicator } from './ComplianceIndicator';
 export { ColorCard } from './ColorCard';
 export { ContrastResult } from './ContrastResult';
-export { ColorEditor } from './ColorEditor';
+export { ColorEditor } from './ColorEditor/ColorEditor';
 export { Palette } from './Palette';
 export { ContrastGrid } from './ContrastGrid';
 

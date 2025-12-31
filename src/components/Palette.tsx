@@ -1,7 +1,7 @@
 import React from 'react';
 import { Plus } from 'lucide-react';
 import { ColorCard } from './ColorCard';
-import type { Color } from '../types/Color';
+import type { Color, VisualConfig } from '../types/Color';
 
 type PaletteProps = {
     title: string;
@@ -13,9 +13,10 @@ type PaletteProps = {
     onRemove: (id: number) => void;
     updateForeground: (id: number, updates: Partial<Color>) => void;
     updateBackground: (id: number, updates: Partial<Color>) => void;
+    visualConfig?: VisualConfig;
 };
 
-export const Palette: React.FC<PaletteProps> = ({ title, type, colors, selectedId, onSelect, onAdd, onRemove, updateForeground, updateBackground }) => (
+export const Palette: React.FC<PaletteProps> = ({ title, type, colors, selectedId, onSelect, onAdd, onRemove, updateForeground, updateBackground, visualConfig }) => (
     <div>
         <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl font-semibold text-gray-900">{title}</h2>
@@ -36,6 +37,7 @@ export const Palette: React.FC<PaletteProps> = ({ title, type, colors, selectedI
                     canRemove={colors.length > 1}
                     updateForeground={updateForeground}
                     updateBackground={updateBackground}
+                    visualConfig={visualConfig}
                 />
             ))}
         </div>
