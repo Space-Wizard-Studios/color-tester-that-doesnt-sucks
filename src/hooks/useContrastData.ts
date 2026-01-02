@@ -22,7 +22,7 @@ export type ContrastData = {
     nonTextSimulated: boolean;
     iconOriginal: boolean;
     iconSimulated: boolean;
-    simulatedSummary: { originalContrast: number; simulatedContrast: number; simulatedPass: boolean };
+    simulatedSummary: { originalContrast: number; simulatedContrast: number; simulatedPass: boolean; simulatedPassAA: boolean; simulatedPassAAA: boolean };
     delta: number;
     deltaNorm: number;
     deltaLabel: string;
@@ -30,6 +30,8 @@ export type ContrastData = {
     chromaticVibration: boolean;
     ambient: { worstContrast: number; worstVariant: Partial<VisualConfig> | null };
     ambientPass: boolean;
+    ambientPassAA: boolean;
+    ambientPassAAA: boolean;
     examples: { deltaBW: number; deltaBG: number; deltaBWNorm: number; deltaBGNorm: number };
 };
 
@@ -77,6 +79,8 @@ export const useContrastData = (fg: Color, bg: Color, visualConfig?: VisualConfi
         ];
         const ambient = evaluateAmbientVariants(fgRgb, bgRgb, ambientPresets);
         const ambientPass = typeof ambient.worstContrast === 'number' ? ambient.worstContrast >= 3 : false;
+        const ambientPassAA = typeof ambient.worstContrast === 'number' ? ambient.worstContrast >= 4.5 : false;
+        const ambientPassAAA = typeof ambient.worstContrast === 'number' ? ambient.worstContrast >= 7 : false;
 
         const exampleBlack = { r: 0, g: 0, b: 0 } as RGB;
         const exampleWhite = { r: 255, g: 255, b: 255 } as RGB;
@@ -111,6 +115,8 @@ export const useContrastData = (fg: Color, bg: Color, visualConfig?: VisualConfi
             chromaticVibration,
             ambient,
             ambientPass,
+            ambientPassAA,
+            ambientPassAAA,
             examples: { deltaBW, deltaBG, deltaBWNorm, deltaBGNorm }
         };
     }, [fg, bg, visualConfig]);

@@ -48,22 +48,29 @@ export const ContrastBadges: React.FC<Props> = ({ data }) => {
             <div className='space-y-4'>
                 <div>
                     <div className="text-xs font-medium text-gray-600 mb-2">Ambient tests (gamma / contrast)</div>
-                    <Badge
-                        variant={data.ambientPass ? 'success' : 'danger'}
-                        title={`Worst-case contrast across presets: ${data.ambient.worstContrast.toFixed(2)}. Pass threshold: 3:1`}>
-                        Worst Ambient: {data.ambientPass ? 'pass' : 'fail'} ({data.ambient.worstContrast.toFixed(2)})
-                    </Badge>
+                        <div className="flex items-center gap-2">
+                            <Badge
+                                variant={data.ambientPass ? 'success' : 'danger'}
+                                title={`Worst-case contrast across presets: ${data.ambient.worstContrast.toFixed(2)}. Pass threshold: 3:1`}>
+                                Ambient: {data.ambientPass ? 'pass' : 'fail'}
+                            </Badge>
+                            <Badge variant={data.ambientPassAA ? 'success' : 'danger'} title={`Worst-case ≥ 4.5: ${data.ambientPassAA ? 'yes' : 'no'}`}>AA: {data.ambientPassAA ? 'pass' : 'fail'}</Badge>
+                            <Badge variant={data.ambientPassAAA ? 'success' : 'danger'} title={`Worst-case ≥ 7: ${data.ambientPassAAA ? 'yes' : 'no'}`}>AAA: {data.ambientPassAAA ? 'pass' : 'fail'}</Badge>
+                        </div>
                 </div>
 
                 <div>
                     <div className="text-xs font-medium text-gray-600 mb-2">Visual Impairment tests</div>
-                    <Badge
-                        variant={data.simulatedSummary.simulatedPass ? 'success' : 'danger'}
-                        title={`Simulated contrast — original ${data.simulatedSummary.originalContrast.toFixed(2)} → simulated ${data.simulatedSummary.simulatedContrast.toFixed(2)}. Passes when simulated contrast ≥ 3:1`}>
-                        Visual Tests: {data.simulatedSummary.simulatedPass ? 'pass' : 'fail'}
-                    </Badge>
+                        <div className="flex items-center gap-2">
+                            <Badge
+                                variant={data.simulatedSummary.simulatedPass ? 'success' : 'danger'}
+                                title={`Simulated contrast — original ${data.simulatedSummary.originalContrast.toFixed(2)} → simulated ${data.simulatedSummary.simulatedContrast.toFixed(2)}. Passes when simulated contrast ≥ 3:1`}>
+                                Sim: {data.simulatedSummary.simulatedPass ? 'pass' : 'fail'}
+                            </Badge>
+                            <Badge variant={data.simulatedSummary.simulatedPassAA ? 'success' : 'danger'} title={`Simulated contrast ≥ 4.5: ${data.simulatedSummary.simulatedPassAA ? 'yes' : 'no'}`}>AA: {data.simulatedSummary.simulatedPassAA ? 'pass' : 'fail'}</Badge>
+                            <Badge variant={data.simulatedSummary.simulatedPassAAA ? 'success' : 'danger'} title={`Simulated contrast ≥ 7: ${data.simulatedSummary.simulatedPassAAA ? 'yes' : 'no'}`}>AAA: {data.simulatedSummary.simulatedPassAAA ? 'pass' : 'fail'}</Badge>
+                        </div>
                 </div>
-
 
             </div>
 

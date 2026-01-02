@@ -34,11 +34,23 @@ export const deltaEoklch = (fg: RGB, bg: RGB) => {
 // Simulate visual config and return contrasts and pass/fail for a given threshold
 export const simulateAndCheck = (fg: RGB, bg: RGB, config?: VisualConfig, threshold = NON_TEXT_CONTRAST_THRESHOLD) => {
   const original = calculateContrast(fg, bg);
-  if (!config) return { originalContrast: original, simulatedContrast: original, simulatedPass: original >= threshold };
+  if (!config) return {
+    originalContrast: original,
+    simulatedContrast: original,
+    simulatedPass: original >= threshold,
+    simulatedPassAA: original >= 4.5,
+    simulatedPassAAA: original >= 7
+  };
   const fgAdj = applyVisualConfig(fg, config);
   const bgAdj = applyVisualConfig(bg, config);
   const simulated = calculateContrast(fgAdj, bgAdj);
-  return { originalContrast: original, simulatedContrast: simulated, simulatedPass: simulated >= threshold };
+  return {
+    originalContrast: original,
+    simulatedContrast: simulated,
+    simulatedPass: simulated >= threshold,
+    simulatedPassAA: simulated >= 4.5,
+    simulatedPassAAA: simulated >= 7
+  };
 };
 
 export const evaluateAmbientVariants = (fg: RGB, bg: RGB, variants: Partial<VisualConfig>[] = []) => {
@@ -69,7 +81,9 @@ export const evaluateAmbientVariants = (fg: RGB, bg: RGB, variants: Partial<Visu
 // which often causes visual discomfort when used for adjacent areas or text.
 export const CHROMA_VIBRATION_THRESHOLD = 0.15; // empirical
 export const CHROMA_VIBRATION_MIN_HUE = 30; // degrees
-export const CHROMA_VIBRATION_MAX_HUE = 150; // degrees
+// Include complementary pairs (up to 180°) as potential vibration — complementary
+// high-chroma pairs can also be visually jarring, so allow up to 180° here.
+export const CHROMA_VIBRATION_MAX_HUE = 180; // degrees
 
 export const checkChromaticVibration = (fg: RGB, bg: RGB) => {
   const a = rgbToOklch(fg);
